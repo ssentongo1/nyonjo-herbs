@@ -100,17 +100,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
   return (
     <div className="min-h-screen">
       {/* Back Navigation */}
-      <section className="bg-gradient-to-br from-rose-50 to-white py-8">
-        <div className="container mx-auto px-6">
-          <Link href="/blog" className="inline-flex items-center text-rose-600 hover:text-rose-700 mb-4">
+      <section className="bg-gradient-to-br from-rose-50 to-white py-4 md:py-6 lg:py-8">
+        <div className="container mx-auto px-4 md:px-6">
+          <Link href="/blog" className="inline-flex items-center text-rose-600 hover:text-rose-700 mb-3 md:mb-4 text-sm md:text-base">
             ← Back to Blog
           </Link>
         </div>
       </section>
 
       {/* Blog Post */}
-      <section className="py-8">
-        <div className="container mx-auto px-6">
+      <section className="py-4 md:py-6 lg:py-8">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             <BlogPostClient 
               post={post}

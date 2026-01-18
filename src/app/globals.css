@@ -6,14 +6,16 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #fffaf5; /* Cream background */
-  font-weight: 600; /* Semi-bold default for better readability */
+  background: linear-gradient(to bottom, #fffaf5, #fff5f7); /* Cream to rose-50 gradient */
+  font-weight: 400; /* Normal weight for better readability */
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -22,12 +24,13 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: #be185d;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #9d174d;
 }
+
 /* Dropdown animation */
 .dropdown-content {
   animation: fadeIn 0.2s ease-out;
@@ -55,9 +58,65 @@ body {
     width: 90% !important;
     max-width: 300px !important;
   }
+  
+  /* Better tap targets on mobile */
+  button, 
+  a,
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevent zoom on input focus */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
 
+/* Text overflow handling */
 .overflow-wrap-anywhere {
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+/* Line clamping utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid #be185d;
+  outline-offset: 2px;
+}
+
+/* Prevent content shift when scrollbar appears */
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }

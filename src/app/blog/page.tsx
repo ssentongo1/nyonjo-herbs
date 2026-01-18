@@ -111,28 +111,28 @@ export default function BlogPage() {
   }
 
   if (!mounted || loading) return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-rose-600"></div>
+    <div className="min-h-screen flex items-center justify-center py-20">
+      <div className="animate-spin rounded-full h-8 w-8 md:h-12 md:w-12 border-b-2 border-rose-600"></div>
     </div>
   )
   
   return (
     <div className="min-h-screen">
       {/* Blog Hero */}
-      <section className="bg-gradient-to-br from-pink-50 to-white py-12 md:py-20">
+      <section className="bg-gradient-to-br from-pink-50 to-white py-8 md:py-12 lg:py-20">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
             <div>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 md:mb-4">
                 Wellness <span className="text-rose-600">Blog</span>
               </h1>
-              <p className="text-lg md:text-xl text-gray-700 max-w-3xl">
+              <p className="text-base md:text-lg lg:text-xl text-gray-700 max-w-3xl">
                 Educational content, herbal wisdom, and wellness tips from our community.
               </p>
             </div>
             <button
               onClick={refreshPosts}
-              className="text-rose-600 hover:text-rose-700 text-sm md:text-base font-medium"
+              className="text-rose-600 hover:text-rose-700 text-sm md:text-base font-medium self-start md:self-center"
             >
               ↻ Refresh
             </button>
@@ -141,11 +141,11 @@ export default function BlogPage() {
       </section>
 
       {/* Blog Grid */}
-      <section className="py-8 md:py-16">
+      <section className="py-6 md:py-8 lg:py-16">
         <div className="container mx-auto px-4 md:px-6">
           {posts.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-6 md:mb-8 lg:mb-12">
                 {posts.map((post) => {
                   const isVideo = isVideoUrl(post.cover_image)
                   const isImage = isImageUrl(post.cover_image)
@@ -153,10 +153,10 @@ export default function BlogPage() {
                   return (
                     <div 
                       key={post.id} 
-                      className="bg-white rounded-2xl shadow-lg border border-rose-100 overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                      className="bg-white rounded-xl md:rounded-2xl shadow-lg border border-rose-100 overflow-hidden hover:shadow-xl transition-shadow duration-300"
                     >
                       {/* Media Container */}
-                      <div className="relative h-48 w-full overflow-hidden bg-black">
+                      <div className="relative h-40 md:h-48 w-full overflow-hidden bg-black">
                         {isVideo ? (
                           // Video player - fits within container
                           <div className="relative w-full h-full flex items-center justify-center">
@@ -172,7 +172,7 @@ export default function BlogPage() {
                               Your browser does not support videos.
                             </video>
                             {/* Video badge */}
-                            <div className="absolute top-3 left-3 bg-black/70 text-white text-xs px-2 py-1 rounded flex items-center">
+                            <div className="absolute top-2 left-2 md:top-3 md:left-3 bg-black/70 text-white text-xs px-2 py-1 rounded flex items-center">
                               <span className="mr-1">🎬</span>
                               <span>Video</span>
                             </div>
@@ -185,20 +185,20 @@ export default function BlogPage() {
                           />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-rose-50 to-pink-50 flex items-center justify-center">
-                            <div className="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center">
-                              <span className="text-2xl text-rose-600">📝</span>
+                            <div className="w-12 h-12 md:w-16 md:h-16 bg-rose-100 rounded-full flex items-center justify-center">
+                              <span className="text-xl md:text-2xl text-rose-600">📝</span>
                             </div>
                           </div>
                         )}
                       </div>
                       
                       {/* Content */}
-                      <div className="p-6 md:p-8">
-                        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                          <span className="inline-block bg-rose-100 text-rose-700 px-3 py-1 rounded-full text-sm font-semibold">
+                      <div className="p-4 md:p-6 lg:p-8">
+                        <div className="flex flex-wrap items-center justify-between gap-2 mb-3 md:mb-4">
+                          <span className="inline-block bg-rose-100 text-rose-700 px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold">
                             {post.category}
                           </span>
-                          <div className="flex items-center space-x-2 text-gray-500 text-sm">
+                          <div className="flex items-center space-x-2 text-gray-500 text-xs md:text-sm">
                             <span className="flex items-center">
                               <span className="mr-1">👁️</span>
                               <span>{post.view_count}</span>
@@ -209,10 +209,10 @@ export default function BlogPage() {
                             </span>
                           </div>
                         </div>
-                        <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4 line-clamp-2">
+                        <h3 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 mb-2 md:mb-3 lg:mb-4 line-clamp-2">
                           {post.title}
                         </h3>
-                        <p className="text-gray-600 text-sm md:text-base mb-4 md:mb-6 line-clamp-3">
+                        <p className="text-gray-600 text-xs md:text-sm lg:text-base mb-3 md:mb-4 lg:mb-6 line-clamp-3">
                           {post.excerpt}
                         </p>
                         <div className="flex items-center justify-between">
@@ -221,7 +221,7 @@ export default function BlogPage() {
                           </span>
                           <Link
                             href={`/blog/${post.id}`}
-                            className="text-rose-600 hover:text-rose-700 font-semibold text-sm md:text-base"
+                            className="text-rose-600 hover:text-rose-700 font-semibold text-xs md:text-sm lg:text-base"
                           >
                             Read →
                           </Link>
@@ -232,22 +232,22 @@ export default function BlogPage() {
                 })}
               </div>
               
-              <div className="mt-8 md:mt-12 text-center">
+              <div className="mt-6 md:mt-8 lg:mt-12 text-center">
                 <p className="text-gray-600 text-sm md:text-base">
                   Showing {posts.length} blog post{posts.length !== 1 ? 's' : ''}
                 </p>
               </div>
             </>
           ) : (
-            <div className="bg-gradient-to-r from-rose-50 to-pink-50 rounded-2xl md:rounded-3xl p-8 md:p-12 text-center">
-              <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-r from-rose-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8">
-                <span className="text-2xl md:text-3xl text-white">📚</span>
+            <div className="bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl md:rounded-2xl lg:rounded-3xl p-6 md:p-8 lg:p-12 text-center">
+              <div className="w-12 h-12 md:w-16 md:h-16 lg:w-24 lg:h-24 bg-gradient-to-r from-rose-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 lg:mb-8">
+                <span className="text-xl md:text-2xl lg:text-3xl text-white">📚</span>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">Blog Content Coming Soon!</h2>
-              <p className="text-base md:text-xl text-gray-700 mb-6 md:mb-8 max-w-2xl mx-auto">
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 md:mb-3 lg:mb-4">Blog Content Coming Soon!</h2>
+              <p className="text-sm md:text-base lg:text-xl text-gray-700 mb-4 md:mb-6 lg:mb-8 max-w-2xl mx-auto">
                 We're preparing valuable educational content about herbal wellness and women's health.
               </p>
-              <p className="text-gray-600 text-sm md:text-base">
+              <p className="text-gray-600 text-xs md:text-sm lg:text-base">
                 Videos, articles, and community discussions will be available here.
               </p>
             </div>

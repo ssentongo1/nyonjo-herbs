@@ -250,50 +250,50 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
     const maxDepth = 3; // Limit nesting depth for mobile
 
     return (
-      <div key={comment.id} className={`${isReply && depth < maxDepth ? 'ml-3 border-l-2 border-gray-200 pl-3' : ''}`}>
+      <div key={comment.id} className={`${isReply && depth < maxDepth ? 'ml-2 md:ml-3 border-l-2 border-gray-200 pl-2 md:pl-3' : ''}`}>
         <div className={`bg-gray-50 rounded-lg p-3 ${isReply ? 'mt-2' : 'mt-3'}`}>
           <div className="flex justify-between items-start mb-2">
-            <div className="flex items-center">
-              <div className="w-6 h-6 bg-gradient-to-r from-rose-400 to-pink-500 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
-                <span className="text-white text-xs font-bold">
+            <div className="flex items-center max-w-[70%]">
+              <div className="w-5 h-5 md:w-6 md:h-6 bg-gradient-to-r from-rose-400 to-pink-500 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                <span className="text-white text-[10px] md:text-xs font-bold">
                   {comment.username.charAt(0).toUpperCase()}
                 </span>
               </div>
-              <div>
+              <div className="min-w-0">
                 <div className="flex items-center flex-wrap gap-1">
-                  <span className="font-medium text-sm text-gray-900">{comment.username}</span>
+                  <span className="font-medium text-xs md:text-sm text-gray-900 truncate">{comment.username}</span>
                   {isOP && (
-                    <span className="px-1.5 py-0.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white text-xs rounded-full">
+                    <span className="px-1 py-0.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white text-[10px] md:text-xs rounded-full flex-shrink-0">
                       OP
                     </span>
                   )}
                   {isSelfReply && (
-                    <span className="px-1.5 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full">
+                    <span className="px-1 py-0.5 bg-blue-100 text-blue-700 text-[10px] md:text-xs rounded-full flex-shrink-0">
                       Author
                     </span>
                   )}
                 </div>
               </div>
             </div>
-            <span className="text-xs text-gray-500 whitespace-nowrap">
+            <span className="text-[10px] md:text-xs text-gray-500 whitespace-nowrap flex-shrink-0">
               {formatTime(comment.created_at)}
             </span>
           </div>
           
-          <p className="text-gray-800 text-sm break-words overflow-wrap-anywhere whitespace-pre-line">
+          <p className="text-gray-800 text-xs md:text-sm break-words overflow-wrap-anywhere whitespace-pre-line">
             {comment.content}
           </p>
           
-          <div className="mt-3 flex items-center space-x-3">
+          <div className="mt-2 md:mt-3 flex items-center space-x-2 md:space-x-3">
             <button
               onClick={() => handleLikeComment(comment.id, isCurrentlyLiked)}
-              className={`flex items-center space-x-1 text-xs ${
+              className={`flex items-center space-x-1 text-[10px] md:text-xs ${
                 isCurrentlyLiked 
                   ? 'text-rose-600' 
                   : 'text-gray-500 hover:text-rose-600'
               }`}
             >
-              <span>{isCurrentlyLiked ? '❤️' : '🤍'}</span>
+              <span className="text-sm md:text-base">{isCurrentlyLiked ? '❤️' : '🤍'}</span>
               <span>{comment.likes}</span>
             </button>
             <button
@@ -301,14 +301,14 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
                 setReplyTo(replyTo === comment.id ? null : comment.id);
                 setUsernameError('');
               }}
-              className="text-xs text-gray-500 hover:text-rose-600"
+              className="text-[10px] md:text-xs text-gray-500 hover:text-rose-600"
             >
               Reply
             </button>
             {replies.length > 0 && (
               <button
                 onClick={() => toggleReplies(comment.id)}
-                className="text-xs text-gray-500 hover:text-rose-600"
+                className="text-[10px] md:text-xs text-gray-500 hover:text-rose-600"
               >
                 {isExpanded ? 'Hide' : `${replies.length} repl${replies.length === 1 ? 'y' : 'ies'}`}
               </button>
@@ -317,15 +317,15 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
 
           {/* Reply form */}
           {replyTo === comment.id && depth < maxDepth && (
-            <div className="mt-3">
+            <div className="mt-2 md:mt-3">
               <div className="space-y-2">
                 <div className="flex items-center space-x-2">
-                  <div className="w-6 h-6 bg-gradient-to-r from-rose-400 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white text-xs font-bold">
+                  <div className="w-5 h-5 md:w-6 md:h-6 bg-gradient-to-r from-rose-400 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-[10px] md:text-xs font-bold">
                       {username ? username.charAt(0).toUpperCase() : '?'}
                     </span>
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <input
                       type="text"
                       value={username}
@@ -334,10 +334,10 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
                         setUsernameError('');
                       }}
                       placeholder="Your username"
-                      className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg"
+                      className="w-full px-2 py-1.5 md:px-3 md:py-1.5 text-xs md:text-sm border border-gray-300 rounded-lg"
                     />
                     {usernameError && (
-                      <p className="text-red-500 text-xs mt-1">{usernameError}</p>
+                      <p className="text-red-500 text-[10px] md:text-xs mt-1">{usernameError}</p>
                     )}
                   </div>
                 </div>
@@ -346,7 +346,7 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
                     value={replyContent}
                     onChange={(e) => setReplyContent(e.target.value)}
                     placeholder={`Reply to ${comment.username}...`}
-                    className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-lg resize-none min-h-[44px] max-h-24"
+                    className="flex-1 px-2 py-1.5 md:px-3 md:py-1.5 text-xs md:text-sm border border-gray-300 rounded-lg resize-none min-h-[40px] md:min-h-[44px] max-h-24"
                     rows={1}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' && !e.shiftKey) {
@@ -358,7 +358,7 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
                   <button
                     onClick={() => handleReply(comment.id, comment.username)}
                     disabled={loading || !replyContent.trim()}
-                    className="px-3 py-1.5 bg-rose-600 text-white text-sm rounded-lg disabled:opacity-50 disabled:cursor-not-allowed self-end h-[44px] min-w-[60px]"
+                    className="px-2 py-1.5 md:px-3 md:py-1.5 bg-rose-600 text-white text-xs md:text-sm rounded-lg disabled:opacity-50 disabled:cursor-not-allowed self-end h-[40px] md:h-[44px] min-w-[50px] md:min-w-[60px]"
                   >
                     {loading ? '...' : 'Post'}
                   </button>
@@ -377,7 +377,7 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
             {hasMoreReplies && (
               <button
                 onClick={() => showMoreReplies(comment.id)}
-                className="ml-3 text-xs text-rose-600 hover:text-rose-700 mt-2 px-3 py-1 bg-rose-50 rounded-lg"
+                className="ml-2 md:ml-3 text-[10px] md:text-xs text-rose-600 hover:text-rose-700 mt-1 md:mt-2 px-2 py-1 md:px-3 md:py-1 bg-rose-50 rounded-lg"
               >
                 Show more replies
               </button>
@@ -391,19 +391,19 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
   const topLevelComments = comments.filter(comment => !comment.parent_id);
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-2 md:p-4">
-      <div className="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+    <div className="fixed inset-0 z-[100] flex items-start md:items-center justify-center bg-black/50 p-1 md:p-2 lg:p-4 overflow-y-auto">
+      <div className="bg-white rounded-lg md:rounded-xl w-full max-w-lg max-h-[90vh] flex flex-col my-2 md:my-0">
         {/* Header */}
         <div className="flex justify-between items-center p-3 md:p-4 border-b">
-          <div>
-            <h3 className="text-base md:text-lg font-bold text-gray-900">Comments</h3>
-            <p className="text-xs text-gray-500 mt-0.5">
+          <div className="min-w-0">
+            <h3 className="text-sm md:text-base lg:text-lg font-bold text-gray-900 truncate">Comments</h3>
+            <p className="text-[10px] md:text-xs text-gray-500 mt-0.5 truncate">
               Note: Usernames are unique per post
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 text-2xl"
+            className="text-gray-500 hover:text-gray-700 text-xl md:text-2xl flex-shrink-0"
             aria-label="Close comments"
           >
             ×
@@ -411,15 +411,15 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
         </div>
 
         {/* Comments List */}
-        <div className="flex-1 overflow-y-auto p-2 md:p-4">
+        <div className="flex-1 overflow-y-auto p-2 md:p-3 lg:p-4">
           {topLevelComments.length === 0 ? (
-            <div className="text-center py-8 px-4 text-gray-500">
-              <div className="w-12 h-12 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-rose-500 text-xl">💬</span>
+            <div className="text-center py-6 md:py-8 px-4 text-gray-500">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-3">
+                <span className="text-rose-500 text-lg md:text-xl">💬</span>
               </div>
-              <p className="text-base mb-1">No comments yet</p>
-              <p className="text-sm mb-4">Be the first to share your thoughts!</p>
-              <div className="p-3 bg-rose-50 rounded-lg text-xs text-gray-600 text-left">
+              <p className="text-sm md:text-base mb-1">No comments yet</p>
+              <p className="text-xs md:text-sm mb-3 md:mb-4">Be the first to share your thoughts!</p>
+              <div className="p-2 md:p-3 bg-rose-50 rounded-lg text-xs md:text-sm text-gray-600 text-left">
                 <p className="font-medium mb-1">⚠️ Username Policy:</p>
                 <ul className="space-y-1">
                   <li className="flex items-start">
@@ -438,21 +438,21 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
               </div>
             </div>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-1 md:space-y-2">
               {topLevelComments.map(comment => renderComment(comment))}
             </div>
           )}
         </div>
 
-        {/* New comment form - Mobile optimized */}
-        <div className="border-t p-3 md:p-4 space-y-3">
+        {/* New comment form */}
+        <div className="border-t p-2 md:p-3 lg:p-4 space-y-2 md:space-y-3">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-rose-400 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-white text-xs font-bold">
+            <div className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 bg-gradient-to-r from-rose-400 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-white text-[10px] md:text-xs font-bold">
                 {username ? username.charAt(0).toUpperCase() : '?'}
               </span>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <input
                 type="text"
                 value={username}
@@ -461,11 +461,11 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
                   setUsernameError('');
                 }}
                 placeholder="Your unique username"
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg"
+                className="w-full px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm border border-gray-300 rounded-lg"
                 required
               />
               {usernameError && (
-                <p className="text-red-500 text-xs mt-1">{usernameError}</p>
+                <p className="text-red-500 text-[10px] md:text-xs mt-1">{usernameError}</p>
               )}
             </div>
           </div>
@@ -476,7 +476,7 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Write a comment..."
-              className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg resize-none min-h-[44px] max-h-24"
+              className="flex-1 px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm border border-gray-300 rounded-lg resize-none min-h-[40px] md:min-h-[44px] max-h-24"
               rows={1}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
@@ -488,13 +488,13 @@ export default function Comments({ postId, onClose, postUsername = '' }: Comment
             <button
               onClick={handleSubmitComment}
               disabled={loading || !newComment.trim() || !username.trim()}
-              className="px-3 md:px-4 py-2 bg-rose-600 text-white rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed self-end h-[44px] min-w-[60px]"
+              className="px-2 py-1.5 md:px-3 md:py-2 bg-rose-600 text-white text-xs md:text-sm rounded-lg disabled:opacity-50 disabled:cursor-not-allowed self-end h-[40px] md:h-[44px] min-w-[50px] md:min-w-[60px] lg:min-w-[70px]"
             >
               {loading ? '...' : 'Post'}
             </button>
           </div>
           
-          <div className="text-xs text-gray-500 text-center">
+          <div className="text-[10px] md:text-xs text-gray-500 text-center">
             Press Enter to post • Shift+Enter for new line
           </div>
         </div>

@@ -179,31 +179,31 @@ export default function BlogPostClient({
   }
 
   return (
-    <div className="space-y-6 md:space-y-8">
+    <div className="space-y-4 md:space-y-6 lg:space-y-8">
       {/* Post Header */}
-      <div className="bg-white rounded-2xl shadow-lg border border-rose-100 p-6 md:p-8">
-        <div className="flex flex-wrap items-center justify-between gap-2 mb-4 md:mb-6">
-          <span className="inline-block bg-rose-100 text-rose-700 px-3 py-1 rounded-full text-sm font-semibold">
+      <div className="bg-white rounded-lg md:rounded-xl lg:rounded-2xl shadow-lg border border-rose-100 p-4 md:p-6 lg:p-8">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-3 md:mb-4 lg:mb-6">
+          <span className="inline-block bg-rose-100 text-rose-700 px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold">
             {post.category}
           </span>
           {isVideoPost() && (
-            <span className="inline-flex items-center bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
+            <span className="inline-flex items-center bg-purple-100 text-purple-800 px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold">
               <span className="mr-1">🎬</span> Video Post
             </span>
           )}
           {isImagePost() && (
-            <span className="inline-flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
+            <span className="inline-flex items-center bg-green-100 text-green-800 px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold">
               <span className="mr-1">🖼️</span> Image Post
             </span>
           )}
         </div>
         
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
+        <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-3 md:mb-4 lg:mb-6">
           {post.title}
         </h1>
         
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 md:mb-8 text-gray-600 text-sm md:text-base">
-          <div className="flex flex-wrap items-center gap-3 md:gap-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4 md:mb-6 lg:mb-8 text-gray-600 text-xs md:text-sm lg:text-base">
+          <div className="flex flex-wrap items-center gap-2 md:gap-3 lg:gap-4">
             <span>📅 {new Date(post.published_at).toLocaleDateString()}</span>
             <span>👁️ {post.view_count || 0} views</span>
             <span>💬 {comments.length} comments</span>
@@ -213,12 +213,12 @@ export default function BlogPostClient({
         
         {/* Media Display */}
         {post.cover_image && (
-          <div className="mb-6 md:mb-8 overflow-hidden rounded-xl">
+          <div className="mb-4 md:mb-6 lg:mb-8 overflow-hidden rounded-lg md:rounded-xl">
             {isVideoPost() ? (
-              <div className="w-full rounded-xl overflow-hidden bg-black">
+              <div className="w-full rounded-lg md:rounded-xl overflow-hidden bg-black">
                 <video 
                   controls 
-                  className="w-full h-auto max-h-[500px] bg-black"
+                  className="w-full h-auto max-h-[300px] md:max-h-[400px] lg:max-h-[500px] bg-black"
                   playsInline
                   preload="metadata"
                   key={post.cover_image}
@@ -234,78 +234,78 @@ export default function BlogPostClient({
               <img
                 src={post.cover_image}
                 alt={post.title}
-                className="w-full h-auto rounded-xl"
+                className="w-full h-auto rounded-lg md:rounded-xl"
               />
             )}
           </div>
         )}
         
-        <div className="prose prose-base md:prose-lg max-w-none">
+        <div className="prose prose-sm md:prose-base lg:prose-lg max-w-none">
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
       </div>
 
       {/* Like and Comment Buttons */}
-      <div className="bg-white rounded-2xl shadow-lg border border-rose-100 p-4">
-        <div className="flex items-center justify-around border-b border-gray-200 pb-4 mb-4">
+      <div className="bg-white rounded-lg md:rounded-xl lg:rounded-2xl shadow-lg border border-rose-100 p-3 md:p-4 lg:p-6">
+        <div className="flex items-center justify-around border-b border-gray-200 pb-3 md:pb-4 mb-3 md:mb-4">
           <button
             onClick={handleLike}
             disabled={loadingLike}
-            className={`flex items-center space-x-2 px-3 py-2 md:px-4 md:py-2 rounded-lg transition-colors ${hasLiked ? 'text-rose-600 bg-rose-50' : 'text-gray-600 hover:bg-gray-100'}`}
+            className={`flex items-center space-x-1 md:space-x-2 px-2 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2 rounded-lg transition-colors ${hasLiked ? 'text-rose-600 bg-rose-50' : 'text-gray-600 hover:bg-gray-100'}`}
           >
-            <span className="text-xl">{hasLiked ? '❤️' : '🤍'}</span>
-            <span className="hidden sm:inline">Like</span>
+            <span className="text-lg md:text-xl">{hasLiked ? '❤️' : '🤍'}</span>
+            <span className="hidden sm:inline text-xs md:text-sm lg:text-base">Like</span>
             {likeCount > 0 && (
-              <span className="text-sm">({likeCount})</span>
+              <span className="text-xs md:text-sm">({likeCount})</span>
             )}
           </button>
           
           <button
             onClick={() => setShowCommentForm(!showCommentForm)}
-            className="flex items-center space-x-2 px-3 py-2 md:px-4 md:py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+            className="flex items-center space-x-1 md:space-x-2 px-2 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
           >
-            <span className="text-xl">💬</span>
-            <span className="hidden sm:inline">Comment</span>
+            <span className="text-lg md:text-xl">💬</span>
+            <span className="hidden sm:inline text-xs md:text-sm lg:text-base">Comment</span>
             {comments.length > 0 && (
-              <span className="text-sm">({comments.length})</span>
+              <span className="text-xs md:text-sm">({comments.length})</span>
             )}
           </button>
           
           <button
             onClick={shareOnFacebook}
-            className="flex items-center space-x-2 px-3 py-2 md:px-4 md:py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+            className="flex items-center space-x-1 md:space-x-2 px-2 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
           >
-            <span className="text-xl">↗️</span>
-            <span className="hidden sm:inline">Share</span>
+            <span className="text-lg md:text-xl">↗️</span>
+            <span className="hidden sm:inline text-xs md:text-sm lg:text-base">Share</span>
           </button>
         </div>
 
         {/* Comment Form */}
         {showCommentForm && (
-          <div className="mb-4 md:mb-6 p-4 bg-gray-50 rounded-lg">
-            <h4 className="text-lg font-semibold text-gray-900 mb-3 md:mb-4">Leave a comment</h4>
+          <div className="mb-3 md:mb-4 lg:mb-6 p-3 md:p-4 bg-gray-50 rounded-lg">
+            <h4 className="text-base md:text-lg lg:text-xl font-semibold text-gray-900 mb-2 md:mb-3 lg:mb-4">Leave a comment</h4>
             
             {commentSuccess && (
-              <div className="mb-3 md:mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">
+              <div className="mb-2 md:mb-3 lg:mb-4 bg-green-50 border border-green-200 text-green-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-xs md:text-sm">
                 ✓ Comment submitted! It will appear after approval.
               </div>
             )}
             
             {commentError && (
-              <div className="mb-3 md:mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+              <div className="mb-2 md:mb-3 lg:mb-4 bg-red-50 border border-red-200 text-red-700 px-3 py-2 md:px-4 md:py-3 rounded-lg text-xs md:text-sm">
                 {commentError}
               </div>
             )}
             
-            <form onSubmit={handleCommentSubmit} className="space-y-3 md:space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+            <form onSubmit={handleCommentSubmit} className="space-y-2 md:space-y-3 lg:space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 lg:gap-4">
                 <div>
                   <input
                     type="text"
                     placeholder="Your name *"
                     value={commentForm.name}
                     onChange={(e) => setCommentForm({ ...commentForm, name: e.target.value })}
-                    className="w-full px-3 py-2 md:px-4 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-transparent text-sm"
+                    className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-transparent text-xs md:text-sm"
                     required
                   />
                 </div>
@@ -316,7 +316,7 @@ export default function BlogPostClient({
                     placeholder="Email (optional)"
                     value={commentForm.email}
                     onChange={(e) => setCommentForm({ ...commentForm, email: e.target.value })}
-                    className="w-full px-3 py-2 md:px-4 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-transparent text-sm"
+                    className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-transparent text-xs md:text-sm"
                   />
                 </div>
               </div>
@@ -327,12 +327,12 @@ export default function BlogPostClient({
                   value={commentForm.comment}
                   onChange={(e) => setCommentForm({ ...commentForm, comment: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 md:px-4 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-transparent text-sm"
+                  className="w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-300 focus:border-transparent text-xs md:text-sm"
                   required
                 />
               </div>
               
-              <div className="flex flex-col sm:flex-row sm:justify-end gap-2 sm:space-x-3">
+              <div className="flex flex-col sm:flex-row sm:justify-end gap-1.5 sm:gap-2 lg:gap-3">
                 <button
                   type="button"
                   onClick={() => {
@@ -340,7 +340,7 @@ export default function BlogPostClient({
                     setCommentForm({ name: '', email: '', comment: '' })
                     setCommentError('')
                   }}
-                  className="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium text-sm"
+                  className="px-3 py-1.5 md:px-4 md:py-2 text-gray-600 hover:text-gray-800 font-medium text-xs md:text-sm"
                 >
                   Cancel
                 </button>
@@ -348,7 +348,7 @@ export default function BlogPostClient({
                 <button
                   type="submit"
                   disabled={submittingComment}
-                  className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-rose-600 hover:to-pink-600 transition-all font-semibold text-sm disabled:opacity-50"
+                  className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg hover:from-rose-600 hover:to-pink-600 transition-all font-semibold text-xs md:text-sm disabled:opacity-50"
                 >
                   {submittingComment ? 'Posting...' : 'Post Comment'}
                 </button>
@@ -359,28 +359,28 @@ export default function BlogPostClient({
 
         {/* Comments List */}
         {comments.length > 0 && (
-          <div className="space-y-4 md:space-y-6">
-            <h3 className="text-lg md:text-xl font-bold text-gray-900">
+          <div className="space-y-3 md:space-y-4 lg:space-y-6">
+            <h3 className="text-base md:text-lg lg:text-xl font-bold text-gray-900">
               Comments ({comments.length})
             </h3>
             
             {comments.map((comment) => (
-              <div key={comment.id} className="flex space-x-3 md:space-x-4">
+              <div key={comment.id} className="flex space-x-2 md:space-x-3 lg:space-x-4">
                 <div className="flex-shrink-0">
-                  <div className="w-8 h-8 md:w-10 md:h-10 bg-rose-100 rounded-full flex items-center justify-center">
-                    <span className="text-rose-600 text-sm md:text-base">{comment.name.charAt(0).toUpperCase()}</span>
+                  <div className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-rose-100 rounded-full flex items-center justify-center">
+                    <span className="text-rose-600 text-xs md:text-sm lg:text-base">{comment.name.charAt(0).toUpperCase()}</span>
                   </div>
                 </div>
                 
                 <div className="flex-1">
-                  <div className="bg-gray-50 rounded-2xl rounded-tl-none p-3 md:p-4">
+                  <div className="bg-gray-50 rounded-lg md:rounded-xl rounded-tl-none p-2 md:p-3 lg:p-4">
                     <div className="flex flex-wrap items-center gap-1 md:gap-2 mb-1 md:mb-2">
-                      <span className="font-bold text-gray-900 text-sm md:text-base">{comment.name}</span>
+                      <span className="font-bold text-gray-900 text-xs md:text-sm lg:text-base">{comment.name}</span>
                       <span className="text-gray-500 text-xs md:text-sm">• {formatDate(comment.created_at)}</span>
                     </div>
-                    <p className="text-gray-700 whitespace-pre-line text-sm md:text-base">{comment.comment}</p>
+                    <p className="text-gray-700 whitespace-pre-line text-xs md:text-sm lg:text-base">{comment.comment}</p>
                     
-                    <div className="mt-2 md:mt-3 flex items-center space-x-3 md:space-x-4 text-xs md:text-sm text-gray-500">
+                    <div className="mt-1.5 md:mt-2 lg:mt-3 flex items-center space-x-2 md:space-x-3 lg:space-x-4 text-xs md:text-sm text-gray-500">
                       <button className="hover:text-rose-600">Like</button>
                       <button className="hover:text-rose-600">Reply</button>
                     </div>
@@ -393,12 +393,12 @@ export default function BlogPostClient({
       </div>
 
       {/* Social Sharing */}
-      <div className="bg-white rounded-2xl shadow-lg border border-rose-100 p-4 md:p-6">
-        <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Share this post</h3>
-        <div className="flex flex-wrap gap-2 md:gap-4">
+      <div className="bg-white rounded-lg md:rounded-xl lg:rounded-2xl shadow-lg border border-rose-100 p-3 md:p-4 lg:p-6">
+        <h3 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 mb-2 md:mb-3 lg:mb-4">Share this post</h3>
+        <div className="flex flex-wrap gap-1.5 md:gap-2 lg:gap-4">
           <button
             onClick={shareOnFacebook}
-            className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 md:px-4 md:py-2 rounded-lg transition-colors text-sm"
+            className="flex items-center space-x-1 md:space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-2 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2 rounded-lg transition-colors text-xs md:text-sm"
           >
             <span>f</span>
             <span>Facebook</span>
@@ -406,7 +406,7 @@ export default function BlogPostClient({
           
           <button
             onClick={shareOnTwitter}
-            className="flex items-center space-x-2 bg-blue-400 hover:bg-blue-500 text-white px-3 py-2 md:px-4 md:py-2 rounded-lg transition-colors text-sm"
+            className="flex items-center space-x-1 md:space-x-2 bg-blue-400 hover:bg-blue-500 text-white px-2 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2 rounded-lg transition-colors text-xs md:text-sm"
           >
             <span>🐦</span>
             <span>Twitter</span>
@@ -414,7 +414,7 @@ export default function BlogPostClient({
           
           <button
             onClick={shareOnWhatsApp}
-            className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-3 py-2 md:px-4 md:py-2 rounded-lg transition-colors text-sm"
+            className="flex items-center space-x-1 md:space-x-2 bg-green-600 hover:bg-green-700 text-white px-2 py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2 rounded-lg transition-colors text-xs md:text-sm"
           >
             <span>💬</span>
             <span>WhatsApp</span>
