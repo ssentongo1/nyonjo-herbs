@@ -39,7 +39,7 @@ export default async function Home() {
           <div className="max-w-5xl">
             <div className="inline-block mb-4">
               <span className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-4 py-1.5 rounded-full text-sm font-semibold shadow-md">
-                For Women, By Women
+                For Women's Wellness
               </span>
             </div>
             
@@ -119,7 +119,7 @@ export default async function Home() {
                 {featuredBlogPost.cover_image && featuredBlogPost.cover_image.trim() !== '' && (
                   <div className="relative h-48 lg:h-auto lg:w-1/2 bg-black">
                     {isVideo(featuredBlogPost.cover_image) || featuredBlogPost.media_type === 'video' ? (
-                      <div className="w-full h-48 lg:h-64 bg-black rounded-lg overflow-hidden">
+                      <div className="w-full h-48 md:h-64 bg-black rounded-lg overflow-hidden">
                         <video 
                           controls 
                           className="w-full h-full object-contain"
@@ -347,7 +347,7 @@ export default async function Home() {
                   </div>
                 </div>
                 
-                {/* Show media if exists */}
+                {/* Show media if exists - SAME STRUCTURE AS BLOG POST */}
                 {featuredSisterhoodPost.media_url && (
                   <div className="mb-4">
                     <div className="w-full h-48 md:h-64 bg-black rounded-lg overflow-hidden">
